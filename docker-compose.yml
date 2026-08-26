@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  etsy-exporter:
+    build: .
+    container_name: etsy-shop-exporter
+    volumes:
+      - ./etsy_export:/app/etsy_export
+    environment:
+      - ETSY_API_KEY=${ETSY_API_KEY:-}
+      - ETSY_SHARED_SECRET=${ETSY_SHARED_SECRET:-}
+      - ETSY_ACCESS_TOKEN=${ETSY_ACCESS_TOKEN:-}
+      - ETSY_SHOP_ID=${ETSY_SHOP_ID:-}
+      - ETSY_DOWNLOAD_IMAGES=${ETSY_DOWNLOAD_IMAGES:-0}
+    # Interaktiv starten (fuer manuelle Nutzung)
+    stdin_open: true
+    tty: true
+    # Oder reine CLI mit command (uncomment fuer Automation):
+    # command: ["--no-menu", "--download-images"]
